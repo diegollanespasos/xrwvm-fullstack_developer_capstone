@@ -13,7 +13,8 @@ from django.contrib.auth import login, logout, authenticate
 import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
-from server.djangoapp.restapis import analyze_review_sentiments, get_request, post_review
+
+from .restapis import get_request, analyze_review_sentiments, post_review
 from .models import CarMake, CarModel
 from .populate import initiate
 
@@ -94,6 +95,7 @@ def get_dealerships(request, state="All"):
     else:
         endpoint = "/fetchDealers/"+state
     dealerships = get_request(endpoint)
+    print('hello2', dealerships)
     return JsonResponse({"status":200,"dealers":dealerships})
 
 def get_dealer_details(request, dealer_id):
